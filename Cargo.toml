@@ -2,6 +2,12 @@
 name = "defapp"
 version = "0.1.0"
 edition = "2024"
+description = "CLI tool to inspect and manage default file handlers"
+license = "GNU AGPLv3"
+repository = "https://github.com/sabarish-vm/defapp"
+readme = "README.md"
+keywords = ["cli", "macos", "default-apps", "file-associations"]
+categories = ["command-line-utilities"]
 
 [dependencies]
 objc2-uniform-type-identifiers = { version = "0.3", features = ["UTType"] }

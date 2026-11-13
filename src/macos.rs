@@ -15,7 +15,7 @@ pub fn get_default_for_type(
             if let Some(path) = default_url.to_file_path() {
                 Ok(Some(path))
             } else {
-                anyhow::bail!(format!("Cannot convert {:?} to PathBuf", default_url))
+                anyhow::bail!(format!("Cannot convert {default_url:?} to PathBuf"))
             }
         }
         None => Ok(None),
@@ -26,12 +26,14 @@ pub fn get_all_registered_apps_for_type(workspace: &NSWorkspace, ut_type: &UTTyp
     let all_urls = workspace.URLsForApplicationsToOpenContentType(ut_type);
     all_urls
         .iter()
-        .filter_map(|x| match x.to_file_path() {
-            Some(path) => Some(path),
-            None => {
-                eprintln!("Warning: skipped non-file application URL: {x:?}");
-                None
-            }
+        .filter_map(|x| {
+            x.to_file_path().map_or_else(
+                || {
+                    eprintln!("Warning: skipped non-file application URL: {x:?}");
+                    None
+                },
+                Some,
+            )
         })
         .collect::<Vec<PathBuf>>()
 }

@@ -25,7 +25,7 @@ pub fn build_parser() -> Command {
                         .required(false)
                         .action(ArgAction::SetTrue)
                         .long("json")
-                        .help("Using this flag to output the information as json"),
+                        .help("Output the information as json"),
                 ),
         )
         // ---------- set ----------

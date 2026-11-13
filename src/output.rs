@@ -19,7 +19,7 @@ pub fn output_get(ret: Result<data::GetArgs, anyhow::Error>, workspace: &NSWorks
             if gargs.json_needed {
                 let x = json_output_all(&results);
                 if let Err(er) = x {
-                    eprintln!("json error : {er}")
+                    eprintln!("json error : {er}");
                 }
             } else {
                 for (ext, res) in results {
@@ -67,7 +67,7 @@ fn normal_out(ext: &str, x: &Result<Extdata, anyhow::Error>) {
                 .for_each(|x| println!("\t\t{}", path_to_str(x)));
         }
         Err(err) => {
-            eprintln!("\tError while working with extension {ext} : {}", err);
+            eprintln!("\tError while working with extension {ext} : {err}");
         }
     }
 }

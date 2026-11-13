@@ -13,11 +13,11 @@ pub struct Extdata {
 
 impl Extdata {
     pub fn default_app(&self) -> std::borrow::Cow<'_, str> {
-        if let Some(def_path) = &self.default {
-            path_to_str(def_path)
-        } else {
-            std::borrow::Cow::Borrowed("None")
-        }
+        self.default
+            .as_ref()
+            .map_or(std::borrow::Cow::Borrowed("None"), |def_path| {
+                path_to_str(def_path)
+            })
     }
 }
 

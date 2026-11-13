@@ -1,0 +1,18 @@
+[package]
+name = "fhand"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+objc2-uniform-type-identifiers = { version = "0.3", features = ["UTType"] }
+objc2-foundation = { version = "0.3", features = [
+    "NSURL",
+    "NSArray",
+    "NSString",
+] }
+objc2-app-kit = { version = "0.3", features = [
+    "NSWorkspace",
+    "objc2-uniform-type-identifiers",
+] }
+anyhow = "1.0.104"
+objc2 = "0.6.5"

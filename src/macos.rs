@@ -1,5 +1,5 @@
-use crate::Appdata;
-use anyhow::{Context, ensure};
+use crate::Extdata;
+use anyhow::Context;
 use objc2::rc::Retained;
 use objc2_app_kit::NSWorkspace;
 use objc2_foundation::NSString;
@@ -41,19 +41,19 @@ pub fn ut_type_from_ext(ext: &str) -> Result<Retained<UTType>, anyhow::Error> {
     let ns_ext = NSString::from_str(clean_ext);
 
     let ut_type = UTType::typeWithFilenameExtension(&ns_ext)
-        .with_context(|| format!(".{clean_ext}: Unknown file type\n"))?;
-    ensure!(ut_type.isDeclared(), "Unknown file type to the system\n");
+        .with_context(|| format!(".{clean_ext}: Unknown file type"))?;
     Ok(ut_type)
 }
 
-pub fn inspect_extension(workspace: &NSWorkspace, ext: &str) -> Result<Appdata, anyhow::Error> {
+pub fn inspect_extension(workspace: &NSWorkspace, ext: &str) -> Result<Extdata, anyhow::Error> {
     let ut_type = ut_type_from_ext(ext)?;
 
     let default_app_url = get_default_for_type(workspace, &ut_type)?;
 
     let registered_apps = get_all_registered_apps_for_type(workspace, &ut_type);
 
-    Ok(Appdata {
+    Ok(Extdata {
+        ext: ext.to_string(),
         registered: registered_apps,
         default: default_app_url,
     })

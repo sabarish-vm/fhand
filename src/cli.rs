@@ -4,7 +4,7 @@ use clap::{Arg, ArgAction, ArgMatches, Command};
 use crate::data::GetArgs;
 
 pub fn build_parser() -> Command {
-    Command::new("fhand")
+    Command::new("defapp")
         .author("Sabarish, github.com/sabarish-vm")
         .about("File handler : Check which application handles certain file types by default")
         // ---------- get ----------
